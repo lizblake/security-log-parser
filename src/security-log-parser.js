@@ -17,47 +17,60 @@ class SecurityLogParser extends LitElement {
   constructor() {
     super();
     this.query = "your xml query here";
+    this.vercelBase = '';
+    if (
+      window.location.origin.startsWith("http://127.0.0.1") ||
+      window.location.origin.startsWith("http://localhost")
+    ) {
+      this.vercelBase = window.location.origin
+        .replace(/127.0.0.1:8(.*)/, "localhost:3000")
+        .replace(/localhost:8(.*)/, "localhost:3000");
+    }
   }
 
   render() {
     return html`
       <button class="button" @click="${this._parseXMLString}">
-        XML String
+        XML Parse String
       </button>
-      <button class="button" @click="${this._XMLHttpRequest}">XML File</button>
+      <button class="button" @click="${this._xmlFromFile}">XML File</button>
       <p class="xmlOutput">${this.query}</p>
+      <textarea cols="50" rows="40">
+
+      </textarea>
     `;
+  }
+  // get XML from our microservice
+  goGetXML(xmlStr) {
+    fetch(`${this.vercelBase}/api/xmlToJson`, {
+      method: "POST",
+      body: JSON.stringify({
+        xml: xmlStr,
+      })
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    }).then((data) => {
+      this.shadowRoot.querySelector('textarea').value = JSON.stringify(data, null, 2);
+      console.log(data);
+    });
   }
 
   //parsing strings in DOM tree
   _parseXMLString() {
     const xmlStr = '<q id="a"><span id="b">hey!</span></q>';
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(xmlStr, "application/xml");
-    // print the name of the root element or error message
-    const errorNode = doc.querySelector("parsererror");
-    if (errorNode) {
-      console.log("error while parsing");
-    } else {
-      console.log(doc.documentElement.nodeName);
-    }
+    this.goGetXML(xmlStr);
   }
 
-  _XMLHttpRequest() {
-    const xhr = new XMLHttpRequest();
-    const xmlOutputString = xhr.responseText;
-    xhr.open("GET", "/src/employee.xml", true);
-    xhr.responseType = "text";
-    
-    xhr.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log(xhr.responseText);
-       }
-    };
-
-    xhr.send();
-    //this doesn't work :( but outputs to console.log?
-    //documentQuerySelector('xmlOutput').query = xmlOutputString;
+  _xmlFromFile() {
+    const xmlfile = new URL("./employee.xml", import.meta.url).href;
+    console.log(xmlfile);
+    fetch(xmlfile).then((response) => response.text()).then((data) => {
+      if (data) {
+        this.goGetXML(data);
+      }
+    });
   }
 }
 

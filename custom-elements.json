@@ -4,45 +4,28 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "src/security-log-parser.js",
+      "path": "api/xmlToJson.js",
       "declarations": [
         {
-          "kind": "class",
-          "description": "",
-          "name": "SecurityLogParser",
-          "members": [
+          "kind": "function",
+          "name": "handler",
+          "parameters": [
             {
-              "kind": "field",
-              "name": "header",
-              "type": {
-                "text": "string"
-              },
-              "default": "'My app'",
-              "privacy": "public",
-              "attribute": "header"
-            }
-          ],
-          "attributes": [
+              "name": "req"
+            },
             {
-              "name": "header",
-              "fieldName": "header"
+              "name": "res"
             }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "security-log-parser",
-          "customElement": true
+          ]
         }
       ],
       "exports": [
         {
-          "kind": "custom-element-definition",
-          "name": "security-log-parser",
+          "kind": "js",
+          "name": "default",
           "declaration": {
-            "name": "SecurityLogParser",
-            "module": "src/security-log-parser.js"
+            "name": "handler",
+            "module": "api/xmlToJson.js"
           }
         }
       ]
@@ -70,6 +53,68 @@
           "declaration": {
             "name": "App",
             "module": "stories/security-log-parser.stories.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/security-log-parser.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SecurityLogParser",
+          "members": [
+            {
+              "kind": "method",
+              "name": "goGetXML",
+              "parameters": [
+                {
+                  "name": "xmlStr"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_parseXMLString"
+            },
+            {
+              "kind": "method",
+              "name": "_xmlFromFile"
+            },
+            {
+              "kind": "field",
+              "name": "query",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"your xml query here\""
+            },
+            {
+              "kind": "field",
+              "name": "vercelBase",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "security-log-parser",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "security-log-parser",
+          "declaration": {
+            "name": "SecurityLogParser",
+            "module": "src/security-log-parser.js"
           }
         }
       ]
