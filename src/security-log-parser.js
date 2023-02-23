@@ -16,7 +16,6 @@ class SecurityLogParser extends LitElement {
 
   constructor() {
     super();
-    this.query = "your xml query here";
     this.vercelBase = '';
     if (
       window.location.origin.startsWith("http://127.0.0.1") ||
@@ -34,7 +33,6 @@ class SecurityLogParser extends LitElement {
         XML Parse String
       </button>
       <button class="button" @click="${this._xmlFromFile}">XML File</button>
-      <p class="xmlOutput">${this.query}</p>
       <textarea cols="50" rows="40">
 
       </textarea>
