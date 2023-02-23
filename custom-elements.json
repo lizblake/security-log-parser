@@ -4,6 +4,34 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "api/xmlToJson.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "handler",
+          "parameters": [
+            {
+              "name": "request"
+            },
+            {
+              "name": "res"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "handler",
+            "module": "api/xmlToJson.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/security-log-parser.js",
       "declarations": [
         {
@@ -12,20 +40,20 @@
           "name": "SecurityLogParser",
           "members": [
             {
+              "kind": "method",
+              "name": "_parseXMLString"
+            },
+            {
+              "kind": "method",
+              "name": "_XMLHttpRequest"
+            },
+            {
               "kind": "field",
-              "name": "header",
+              "name": "query",
               "type": {
                 "text": "string"
               },
-              "default": "'My app'",
-              "privacy": "public",
-              "attribute": "header"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "header",
-              "fieldName": "header"
+              "default": "\"your xml query here\""
             }
           ],
           "superclass": {
