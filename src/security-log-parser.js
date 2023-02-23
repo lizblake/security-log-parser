@@ -12,6 +12,10 @@ class SecurityLogParser extends LitElement {
       font-size: 30px;
       width: 500px;
     }
+
+    textarea {
+      display: block;
+    }
   `;
 
   constructor() {
@@ -62,7 +66,7 @@ class SecurityLogParser extends LitElement {
   }
 
   _xmlFromFile() {
-    const xmlfile = new URL("./employee.xml", import.meta.url).href;
+    const xmlfile = new URL("./securityLog.xml", import.meta.url).href;
     console.log(xmlfile);
     fetch(xmlfile).then((response) => response.text()).then((data) => {
       if (data) {
