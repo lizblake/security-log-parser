@@ -16,7 +16,7 @@ class SecurityLogParser extends LitElement {
 
   constructor() {
     super();
-    this.query = 'your xml query here'
+    this.query = "your xml query here";
   }
 
   render() {
@@ -24,14 +24,10 @@ class SecurityLogParser extends LitElement {
       <button class="button" @click="${this._parseXMLString}">
         XML String
       </button>
-      <button class="button" @click="${this._XMLHttpRequest}">
-        XML File
-      </button>
-      <p>${this.query}</p>
+      <button class="button" @click="${this._XMLHttpRequest}">XML File</button>
+      <p class="xmlOutput">${this.query}</p>
     `;
   }
-
-
 
   //parsing strings in DOM tree
   _parseXMLString() {
@@ -49,15 +45,19 @@ class SecurityLogParser extends LitElement {
 
   _XMLHttpRequest() {
     const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("employee").innerHTML = xhr.responseText;
-        }
+    const xmlOutputString = xhr.responseText;
+    xhr.open("GET", "/src/employee.xml", true);
+    xhr.responseType = "text";
+    
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(xhr.responseText);
+       }
     };
-      xhr.open("GET", "/src/employee.xml", true);
-      xhr.responseType = "document";
-      xhr.send();
 
+    xhr.send();
+    //this doesn't work :( but outputs to console.log?
+    //documentQuerySelector('xmlOutput').query = xmlOutputString;
   }
 }
 
