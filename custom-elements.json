@@ -32,33 +32,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "stories/security-log-parser.stories.js",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "App"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "stories/security-log-parser.stories.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "App",
-          "declaration": {
-            "name": "App",
-            "module": "stories/security-log-parser.stories.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/security-log-parser.js",
       "declarations": [
         {
@@ -85,14 +58,6 @@
             },
             {
               "kind": "field",
-              "name": "query",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"your xml query here\""
-            },
-            {
-              "kind": "field",
               "name": "vercelBase",
               "type": {
                 "text": "string"
@@ -115,6 +80,33 @@
           "declaration": {
             "name": "SecurityLogParser",
             "module": "src/security-log-parser.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "stories/security-log-parser.stories.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "App"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "stories/security-log-parser.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "App",
+          "declaration": {
+            "name": "App",
+            "module": "stories/security-log-parser.stories.js"
           }
         }
       ]
